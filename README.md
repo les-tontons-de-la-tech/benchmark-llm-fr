@@ -9,9 +9,9 @@ via OVHcloud AI Endpoints, le 23 novembre 2026.
 
 | Modèle | Note | Latence moy. | Tokens sortie | Coût / 120 tâches |
 |---|---|---|---|---|
-| Olala-v1.0-mini-7A1B | **98,1 %** (103/105) | 4,9 s | 1 458 | gratuit au catalogue |
-| Mistral-Small-3.2-24B-Instruct-2506 | **93,3 %** (98/105) | 4,4 s | 60 | 0,28 c$ |
-| Qwen3.5-9B | **90,5 %** (95/105) | 26,7 s | 2 886 | 6,31 c$ |
+| Olala-v1.0-mini-7A1B | **97,2 %** (106/109) | 4,9 s | 1 458 | gratuit au catalogue |
+| Mistral-Small-3.2-24B-Instruct-2506 | **94,5 %** (103/109) | 4,4 s | 60 | 0,28 c$ |
+| Qwen3.5-9B | **90,8 %** (99/109) | 26,7 s | 2 886 | 6,31 c$ |
 
 Détail, échecs item par item et analyse : [RESULTATS.md](RESULTATS.md).
 
@@ -34,7 +34,7 @@ par les éditeurs de modèles, ni à ceux d'un leaderboard.
 | `extraction` | extraire 4 champs d'un texte métier | JSON parsé, champs comparés |
 | `maths` | arithmétique sur des valeurs tirées (graine fixe) | nombre final exact |
 | `code` | 20 fonctions Python | **code exécuté** en sandbox (`-I`, timeout 10 s) sur des tests unitaires |
-| `francais` | accords, syntaxe, lexique | 8 vérifiables · 10 à juger · 2 écartés |
+| `francais` | accords, syntaxe, lexique | 10 vérifiables · 8 à juger · 2 écartés |
 | `factuel` | constantes et dates du domaine technique | nombre/année final |
 
 ## Reproduire
@@ -90,7 +90,8 @@ la main — et corrigés avant de publier le moindre chiffre :
 - `code-14` : normalisation numérique (`2.00 Ko` = `2.0 Ko` = `2 Ko`), le format n'étant pas imposé ;
 - `consignes-17` : guillemets ouvrants ignorés, ce n'est pas une violation de consigne ;
 - `factuel-04` : 735 et 736 acceptés (1 ch métrique = 735,49875 W, troncature ou arrondi de 735,5) ;
-- `francais-13` écarté : deux trous dans la phrase pour une réponse d'un seul mot.
+- `francais-13` écarté : deux trous dans la phrase pour une réponse d'un seul mot ;
+- cinq items de réécriture (`francais-04/08/10/19/20`) ont été testés en notation déterministe puis **remis au juge** : les listes d'acceptation produisaient des verdicts faux sur des réponses correctes (ex. « Il se trompe. », « Viens-tu ? »), et un faux positif sur une réponse hors sujet. Le test des checkers a tranché contre leur conversion.
 
 ## Structure
 
@@ -113,8 +114,8 @@ de **rejouer la notation sans rappeler l'API**, et de vérifier chaque score.
 
 - Jeu orienté tâches courtes et vérifiables ; rien ici ne mesure le contexte long, le RAG, la
   rédaction longue, ni le coût d'un usage réel en production.
-- 10 items de français restent à juger et 2 ont été écartés : le score « français » ne porte que sur 8.
-- Échantillon de 105 items notés : un écart de 2 à 3 points n'est pas significatif.
+- 8 items de français restent à juger et 2 ont été écartés : le score « français » ne porte que sur 10.
+- Échantillon de 109 items notés : un écart de 2 à 3 points n'est pas significatif.
 - La latence mesurée est le temps total de l'appel HTTP, raisonnement inclus, pas le temps avant
   premier token.
 - Le jeu est calibré sur un domaine (hardware, cloud, français technique) et n'a pas été validé

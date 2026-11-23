@@ -4,47 +4,49 @@ _Banc maison écrit le 21 novembre 2026 (120 questions rédigées pour ce test, 
 
 ## À retenir
 
-- **Olala mini 7A1B gagne sur les tâches vérifiables** (98,1 %), en particulier là où la consigne est contraignante : 20/20 sur le respect de format, contre 14/20 pour Mistral. C'est le seul des trois à obéir systématiquement (« réponds uniquement par… », « exactement 12 mots », « termines par RÉPONSE: »).
-- **Mistral-Small 3.2 24B est le plus factuel** (18/18 sur les faits vérifiables) mais le plus bavard **dans son texte visible** : 174 caractères de réponse en moyenne, contre 103 pour Olala et 129 pour Qwen. Il enrobe chaque réponse d'une introduction ou de guillemets, ce qui lui coûte 6 items sur 20 en consignes. C'est pourtant le plus économe en **tokens facturés** (60 en moyenne) : il ne raisonne pas, quand Olala brûle 1 413 tokens de raisonnement interne pour produire 45 tokens de réponse.
-- **Qwen3.5-9B est le plus lent et le plus cher** : il raisonne de lui-même pour des questions triviales (2 886 tokens de sortie en moyenne, jusqu'à 24 000 et 225 s sur un seul item, avec une boucle de raisonnement qui ne converge jamais). Son score est le plus bas des trois, pour un coût 22 fois supérieur à Mistral.
-- **Sur ce jeu, le petit modèle français gratuit d'OVHcloud n'est pas un compromis** : il est premier en qualité vérifiable, rapide (4,9 s) et sans coût au catalogue. Ses deux seuls échecs sont factuels et réels : il date la fondation d'OVHcloud de 2005 (1999) et le Power Delivery 3.1 de 100 W (240 W).
-- **Ce que le test ne dit pas** : 10 items de rédaction libre en français et 2 items factuels ouverts ne sont pas notés (aucun juge LLM), 2 autres ont été écartés pour énoncé ambigu ; le jeu est orienté réponses courtes et vérifiables. Rien ici ne mesure la tenue sur contexte long, le RAG ou la rédaction longue.
+- **Olala mini 7A1B garde la tête** (97,2 %), en particulier là où la consigne est contraignante : 20/20 en respect de format, contre 15/20 pour Mistral. C'est le seul des trois à obéir systématiquement (« réponds uniquement par… », « exactement 12 mots », « termine par RÉPONSE: »).
+- **Mistral-Small 3.2 24B est le plus factuel** (20/20) mais le plus bavard **dans son texte visible** : 174 caractères de réponse en moyenne, contre 103 pour Olala et 129 pour Qwen. Il enrobe chaque réponse d'une introduction ou de guillemets, ce qui lui coûte 5 items sur 20 en consignes. C'est pourtant le plus économe en **tokens facturés** (60 en moyenne) : il ne raisonne pas, quand Olala brûle 1 413 tokens de raisonnement interne pour produire 45 tokens de réponse.
+- **Qwen3.5-9B est le plus lent et le plus cher** : il raisonne de lui-même pour des questions triviales (2 886 tokens de sortie en moyenne, jusqu'à 24 000 et 225 s sur un seul item, avec une boucle qui ne converge jamais). Son score est le plus bas des trois, pour un coût 22 fois supérieur à Mistral.
+- **L'écart se resserre quand on retire les items subjectifs** : 2,7 points séparent Olala de Mistral sur les 109 items vérifiables. Sur un échantillon de cette taille, ce n'est pas une hiérarchie solide — c'est un avantage sur le suivi de consignes stricte, et rien de plus.
+- **Ce que le test ne dit pas** : 8 items de rédaction libre en français restent à juger (2 autres écartés pour énoncé ambigu), aucun juge LLM n'a été utilisé ; le jeu est orienté réponses courtes et vérifiables. Rien ici ne mesure la tenue sur contexte long, le RAG ou la rédaction longue.
 
 ## Synthèse
 
 | Modèle | Note vérifiable | Items | Latence moy. | Tokens sortie | Tronqués | Erreurs | Coût /120 tâches |
 |---|---|---|---|---|---|---|---|
-| Olala-v1.0-mini-7A1B | **98.1 %** | 103/105 | 4.9 s | 1458 | 0 | 0 | gratuit |
-| Mistral-Small-3.2-24B-Instruct-2506 | **93.3 %** | 98/105 | 4.4 s | 60 | 0 | 0 | 0.28 c$ |
-| Qwen3.5-9B | **90.5 %** | 95/105 | 26.7 s | 2886 | 1 | 0 | 6.31 c$ |
+| Olala-v1.0-mini-7A1B | **97.2 %** | 106/109 | 4.9 s | 1458 | 0 | 0 | gratuit |
+| Mistral-Small-3.2-24B-Instruct-2506 | **94.5 %** | 103/109 | 4.4 s | 60 | 0 | 0 | 0.28 c$ |
+| Qwen3.5-9B | **90.8 %** | 99/109 | 26.7 s | 2886 | 1 | 0 | 6.31 c$ |
 
 ## Par famille
 
 | Famille | Olala-v1.0-mini-7A1B | Mistral-Small-3.2-24B-Instruct-2506 | Qwen3.5-9B |
 |---|---|---|---|
 | code | 100.0 % (19/19) | 94.7 % (18/19) | 84.2 % (16/19) |
-| consignes | 100.0 % (20/20) | 70.0 % (14/20) | 95.0 % (19/20) |
+| consignes | 100.0 % (20/20) | 75.0 % (15/20) | 95.0 % (19/20) |
 | extraction | 100.0 % (20/20) | 100.0 % (20/20) | 85.0 % (17/20) |
-| factuel | 88.9 % (16/18) | 100.0 % (18/18) | 83.3 % (15/18) |
-| francais | 100.0 % (8/8) | 100.0 % (8/8) | 100.0 % (8/8) |
+| factuel | 90.0 % (18/20) | 100.0 % (20/20) | 85.0 % (17/20) |
+| francais | 90.0 % (9/10) | 100.0 % (10/10) | 100.0 % (10/10) |
 | maths | 100.0 % (20/20) | 100.0 % (20/20) | 100.0 % (20/20) |
 
 ## Items discriminants
 
 **code** — code-06, code-14, code-18
-**consignes** — consignes-03, consignes-09, consignes-13, consignes-14, consignes-19, consignes-20
+**consignes** — consignes-03, consignes-09, consignes-13, consignes-14, consignes-20
 **extraction** — extraction-03, extraction-06, extraction-08
 **factuel** — factuel-08, factuel-11, factuel-17, factuel-19, factuel-20
+**francais** — francais-07
 
 ## Échecs communs à tous les modèles (à inspecter : checker trop strict ?)
 
 
-## Échecs — Olala-v1.0-mini-7A1B (2)
+## Échecs — Olala-v1.0-mini-7A1B (3)
 
 - `factuel-08` — attendu 1999, lu 2005.0 — `RÉPONSE: 2005`
 - `factuel-11` — attendu 240, lu 100.0 — `Le port USB‑C Power Delivery en mode PD 3.1 maximal délivre jusqu’à 100 watts. RÉPONSE: 100`
+- `francais-07` — lu: Il a dit que je viendrai demain. — `Il a dit que je viendrai demain.`
 
-## Échecs — Mistral-Small-3.2-24B-Instruct-2506 (7)
+## Échecs — Mistral-Small-3.2-24B-Instruct-2506 (6)
 
 - `code-18` — 0/1 tests — ````python
 def devise(n):
@@ -56,16 +58,6 @@ def devise(n):
 Balzac, Hugo, Zola`
 - `consignes-13` — 6 mots — `"Aujourd'hui, je profite du soleil printemier."`
 - `consignes-14` — lu: LE PROTOCOLE SERT À RÉSOUDRE LES NOMS DE — `LE PROTOCOLE SERT À RÉSOUDRE LES NOMS DE DOMAINE EST LE DNS`
-- `consignes-19` — lu: Voici la chaîne demandée :
-
-```
-OK-2026  — `Voici la chaîne demandée :
-
-```
-OK-2026 42
-```
-
-(La somme de 40 et 2 est 42.)`
 - `consignes-20` — lu: pour classer les temperatures de la plus froide a la plus ch — `Pour classer les températures de la plus froide à la plus chaude, nous comparons les valeurs numériques :
 
 - *`
@@ -110,7 +102,7 @@ RÉPONSE: 1998`
 
 ## Paramètres et reproductibilité
 
-- Jeu de test : 120 tâches, 6 familles, hash SHA-256 `06f56e5895e7303b5b5d99325509a172a492549e0d6a52b11aff772c94dd8eca` (v1.1 ; v1 corrigée, voir plus bas).
+- Jeu de test : 120 tâches, 6 familles, hash SHA-256 `6e4e2a08327cbe4a67affc5f97bfed66d79240ce27fb33138e29f8235aff14e2` (v1.1 ; v1 corrigée, voir plus bas).
 - Température 0,8 · top_p 0,9 · budget de sortie 8 000 tokens, porté à 16 000 (Olala, limite API) et 24 000 (Qwen) pour les items tronqués, relancés une fois.
 - Olala : `reasoning_effort=high` (réglage recommandé par OVHcloud). Mistral et Qwen : réglage par défaut, sans paramètre de raisonnement — Qwen3.5-9B raisonne de lui-même (`reasoning_tokens` dans l'usage).
 - Endpoint : `https://oai.endpoints.kepler.ai.cloud.ovh.net/v1`, clé AI Endpoints authentifiée (400 req/min/projet/modèle).

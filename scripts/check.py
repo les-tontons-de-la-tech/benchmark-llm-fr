@@ -156,12 +156,29 @@ def check(content, reasoning, ck):
         hit = (ck.get("expect_contains", "") in norm(txt)) if ck.get("expect_contains") else any(norm(a) in norm(txt) for a in ck.get("any_of", [""]))
         return (w <= ck["n"] and hit), f"{w} mots"
     if t == "regex":
-        return bool(re.match(ck["pattern"], txt.strip())), f"lu: {txt.strip()[:40]}"
+        return bool(re.search(ck["pattern"], txt.strip(), re.I | re.M)), f"lu: {txt.strip()[:40]}"
     if t == "json_list":
         raw = strip_fences(txt); m = re.search(r"\{.*\}", raw, re.S)
         try: got = json.loads(m.group() if m else raw)
         except Exception: return False, "JSON invalide"
         return got.get(ck["key"]) == ck["expect"], f"lu: {str(got.get(ck['key']))[:40]}"
+    if t == "rewrite":
+        nt = norm(txt)
+        if any(norm(x) in nt for x in ck.get("none", [])):
+            return False, f"tournure fautive conservée"
+        if "patterns" in ck:
+            ok = any(re.search(pat, txt.strip(), re.I) for pat in ck["patterns"])
+        else:
+            ok = True
+        if "any" in ck:
+            ok = ok and all(any(norm(a) in nt for a in grp) for grp in ck["any"])
+        if "at_least" in ck:
+            words, n = ck["at_least"]
+            ok = ok and sum(1 for w in words if norm(w) in nt) >= n
+        if "count_max" in ck:
+            w, n = ck["count_max"]
+            ok = ok and nt.count(norm(w)) <= n
+        return ok, f"lu: {txt.strip()[:70]}"
     if t == "python":
         return check_python(txt, ck["expect"])
     return None, f"checker inconnu {t}"

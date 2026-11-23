@@ -45,11 +45,34 @@ def load(path):
     return [json.loads(l) for l in path.open(encoding="utf-8") if l.strip()]
 
 
-def score(recs):
+# Verdicts du juge Claude sur les 8 items de rédaction libre (jugement_claude.jsonl).
+# Le juge est hors compétition : aucun modèle Anthropic n'est évalué ici.
+VERDICTS = {}
+_j = RUNS / "jugement_claude.jsonl"
+if _j.exists():
+    for _r in load(_j):
+        if _r.get("verdict") in ("OK", "KO"):
+            VERDICTS[(_r["modele"], _r["id"])] = _r["verdict"]
+
+
+def score(recs, modele=None):
     fam = defaultdict(lambda: {"ok": 0, "total": 0, "na": 0})
     details = {}
     for r in recs:
         ck = prompts[r["id"]]["checker"]
+        ctype = ck.get("type") if isinstance(ck, dict) else ck
+        if ctype == "judge":
+            v = VERDICTS.get((modele, r["id"]))
+            ok = None if v is None else (v == "OK")
+            why = f"juge Claude : {v or 'non jugé'}"
+            details[r["id"]] = {"ok": ok, "why": why}
+            f = fam[r["family"]]
+            if ok is None:
+                f["na"] += 1
+            else:
+                f["total"] += 1
+                f["ok"] += int(bool(ok))
+            continue
         ok, why = check(r.get("content", ""), r.get("reasoning", ""), ck)
         if r.get("error"):
             ok, why = False, f"erreur: {r['error'][:80]}"
@@ -69,6 +92,8 @@ def score(recs):
 
 models = {}
 for f in sorted(RUNS.glob("*.jsonl")):
+    if f.name.startswith("jugement"):
+        continue   # verdicts du juge, chargés séparément dans VERDICTS
     if f.name.startswith("_test") or f.stat().st_size == 0:
         continue
     recs = load(f)
@@ -89,7 +114,7 @@ for f in sorted(RUNS.glob("*.jsonl")):
     tok_in = [r.get("usage", {}).get("prompt_tokens", 0) for r in recs if not r.get("error")]
     trunc = sum(1 for r in recs if r.get("finish") == "length")
     errs = sum(1 for r in recs if r.get("error"))
-    s = score(recs)
+    s = score(recs, m)
     pr = PRICING.get(m)
     if pr is None:
         cost = None          # tarif inconnu : on affichera "n.d.", jamais "gratuit"
@@ -103,7 +128,9 @@ order = sorted(models, key=lambda m: -(models[m]["score"]["global"] or 0))
 fams = sorted({f for m in models for f in models[m]["score"]["families"]})
 
 out = ["# Comparatif modèles — 120 tâches françaises (OVHcloud AI Endpoints)", "",
-       "_Notation déterministe (regex, JSON, code exécuté, calcul exact). Aucun juge LLM._", "",
+       "_Notation déterministe pour 109 items (regex, JSON, code exécuté, calcul exact) ; "
+       "8 items de rédaction libre jugés par Claude Opus 5.5, à température 0, sur critères publiés "
+       "(voir `judge_criteria.json`) — juge hors compétition._", "",
        "## Synthèse", "",
        "| Modèle | Note vérifiable | Items | Latence moy. | Tokens sortie | Tronqués | Erreurs | Coût /120 tâches |",
        "|---|---|---|---|---|---|---|---|"]

@@ -1,39 +1,39 @@
 # Comparatif modèles — 120 tâches françaises (OVHcloud AI Endpoints)
 
-_Notation déterministe (regex, JSON, code exécuté, calcul exact). Aucun juge LLM._
+_Notation déterministe pour 109 items (regex, JSON, code exécuté, calcul exact) ; 8 items de rédaction libre jugés par Claude Opus 5.5, à température 0, sur critères publiés (voir `judge_criteria.json`) — juge hors compétition._
 
 ## Synthèse
 
 | Modèle | Note vérifiable | Items | Latence moy. | Tokens sortie | Tronqués | Erreurs | Coût /120 tâches |
 |---|---|---|---|---|---|---|---|
-| gemma-4-26b-a4b | **99.1 %** | 108/109 | 8.3 s | 1127 | 0 | 0 | 5.61 c$ |
-| nemotron3-nano-30b | **99.1 %** | 108/109 | 1.8 s | 329 | 0 | 0 | 0.95 c$ |
-| Qwen3.5-397B-A17B | **99.1 %** | 108/109 | 14.4 s | 2313 | 1 | 0 | 118.38 c$ |
-| Qwen3.6-27B | **99.1 %** | 108/109 | 7.8 s | 1108 | 0 | 0 | 42.72 c$ |
-| gpt-oss-120b | **97.2 %** | 106/109 | 2.9 s | 212 | 0 | 0 | 1.31 c$ |
-| laguna-xs-2.1 | **97.2 %** | 106/109 | 5.4 s | 729 | 0 | 0 | 1.11 c$ |
-| Meta-Llama-3_3-70B-Instruct | **97.2 %** | 106/109 | 2.8 s | 79 | 0 | 0 | 1.40 c$ |
-| nemotron3-omni-30b | **97.2 %** | 106/109 | 2.5 s | 383 | 0 | 0 | 2.76 c$ |
-| Olala-v1.0-mini-7A1B | **97.2 %** | 106/109 | 4.9 s | 1458 | 0 | 0 | gratuit |
-| Qwen3.8-27B | **97.2 %** | 106/109 | 6.0 s | 621 | 0 | 0 | 24.29 c$ |
-| qwen3.6-35b-a3b | **96.3 %** | 105/109 | 14.0 s | 2035 | 3 | 0 | 32.60 c$ |
-| qwen3-vl-30b-a3b | **96.3 %** | 105/109 | 1.3 s | 157 | 0 | 0 | 1.19 c$ |
-| DeepSeek-V4.1-Flash-1017 | **95.4 %** | 104/109 | 1.6 s | 302 | 0 | 0 | 4.80 c$ |
-| Qwen2.5-VL-72B-Instruct | **95.4 %** | 104/109 | 2.0 s | 66 | 0 | 0 | 1.58 c$ |
-| gpt-oss-20b | **94.5 %** | 103/109 | 2.3 s | 270 | 0 | 0 | 0.65 c$ |
-| Mistral-Small-3.2-24B-Instruct-2506 | **94.5 %** | 103/109 | 4.4 s | 60 | 0 | 0 | 0.28 c$ |
-| Qwen3.5-9B | **91.7 %** | 100/109 | 26.7 s | 2886 | 1 | 0 | 6.31 c$ |
+| gemma-4-26b-a4b | **98.3 %** | 115/117 | 8.3 s | 1127 | 0 | 0 | 5.61 c$ |
+| Qwen3.5-397B-A17B | **98.3 %** | 115/117 | 14.4 s | 2313 | 1 | 0 | 118.38 c$ |
+| Qwen3.6-27B | **98.3 %** | 115/117 | 7.8 s | 1108 | 0 | 0 | 42.72 c$ |
+| gpt-oss-120b | **97.4 %** | 114/117 | 2.9 s | 212 | 0 | 0 | 1.31 c$ |
+| Qwen3.8-27B | **97.4 %** | 114/117 | 6.0 s | 621 | 0 | 0 | 24.29 c$ |
+| nemotron3-omni-30b | **96.6 %** | 113/117 | 2.5 s | 383 | 0 | 0 | 2.76 c$ |
+| DeepSeek-V4.1-Flash-1017 | **95.7 %** | 112/117 | 1.6 s | 302 | 0 | 0 | 4.80 c$ |
+| nemotron3-nano-30b | **95.7 %** | 112/117 | 1.8 s | 329 | 0 | 0 | 0.95 c$ |
+| Qwen2.5-VL-72B-Instruct | **95.7 %** | 112/117 | 2.0 s | 66 | 0 | 0 | 1.58 c$ |
+| qwen3.6-35b-a3b | **95.7 %** | 112/117 | 14.0 s | 2035 | 3 | 0 | 32.60 c$ |
+| gpt-oss-20b | **94.9 %** | 111/117 | 2.3 s | 270 | 0 | 0 | 0.65 c$ |
+| laguna-xs-2.1 | **94.9 %** | 111/117 | 5.4 s | 729 | 0 | 0 | 1.11 c$ |
+| Meta-Llama-3_3-70B-Instruct | **94.9 %** | 111/117 | 2.8 s | 79 | 0 | 0 | 1.40 c$ |
+| qwen3-vl-30b-a3b | **94.9 %** | 111/117 | 1.3 s | 157 | 0 | 0 | 1.19 c$ |
+| Olala-v1.0-mini-7A1B | **94.0 %** | 110/117 | 4.9 s | 1458 | 0 | 0 | gratuit |
+| Mistral-Small-3.2-24B-Instruct-2506 | **92.3 %** | 108/117 | 4.4 s | 60 | 0 | 0 | 0.28 c$ |
+| Qwen3.5-9B | **92.3 %** | 108/117 | 26.7 s | 2886 | 1 | 0 | 6.31 c$ |
 
 ## Par famille
 
-| Famille | gemma-4-26b-a4b | nemotron3-nano-30b | Qwen3.5-397B-A17B | Qwen3.6-27B | gpt-oss-120b | laguna-xs-2.1 | Meta-Llama-3_3-70B-Instruct | nemotron3-omni-30b | Olala-v1.0-mini-7A1B | Qwen3.8-27B | qwen3.6-35b-a3b | qwen3-vl-30b-a3b | DeepSeek-V4.1-Flash-1017 | Qwen2.5-VL-72B-Instruct | gpt-oss-20b | Mistral-Small-3.2-24B-Instruct-2506 | Qwen3.5-9B |
+| Famille | gemma-4-26b-a4b | Qwen3.5-397B-A17B | Qwen3.6-27B | gpt-oss-120b | Qwen3.8-27B | nemotron3-omni-30b | DeepSeek-V4.1-Flash-1017 | nemotron3-nano-30b | Qwen2.5-VL-72B-Instruct | qwen3.6-35b-a3b | gpt-oss-20b | laguna-xs-2.1 | Meta-Llama-3_3-70B-Instruct | qwen3-vl-30b-a3b | Olala-v1.0-mini-7A1B | Mistral-Small-3.2-24B-Instruct-2506 | Qwen3.5-9B |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| code | 94.7 % (18/19) | 94.7 % (18/19) | 100.0 % (19/19) | 94.7 % (18/19) | 100.0 % (19/19) | 100.0 % (19/19) | 94.7 % (18/19) | 89.5 % (17/19) | 100.0 % (19/19) | 100.0 % (19/19) | 100.0 % (19/19) | 94.7 % (18/19) | 100.0 % (19/19) | 100.0 % (19/19) | 100.0 % (19/19) | 94.7 % (18/19) | 89.5 % (17/19) |
-| consignes | 100.0 % (20/20) | 100.0 % (20/20) | 100.0 % (20/20) | 100.0 % (20/20) | 95.0 % (19/20) | 90.0 % (18/20) | 95.0 % (19/20) | 100.0 % (20/20) | 100.0 % (20/20) | 100.0 % (20/20) | 100.0 % (20/20) | 85.0 % (17/20) | 95.0 % (19/20) | 85.0 % (17/20) | 100.0 % (20/20) | 75.0 % (15/20) | 95.0 % (19/20) |
-| extraction | 100.0 % (20/20) | 100.0 % (20/20) | 95.0 % (19/20) | 100.0 % (20/20) | 95.0 % (19/20) | 100.0 % (20/20) | 100.0 % (20/20) | 100.0 % (20/20) | 100.0 % (20/20) | 100.0 % (20/20) | 100.0 % (20/20) | 100.0 % (20/20) | 100.0 % (20/20) | 95.0 % (19/20) | 100.0 % (20/20) | 100.0 % (20/20) | 85.0 % (17/20) |
-| factuel | 100.0 % (20/20) | 100.0 % (20/20) | 100.0 % (20/20) | 100.0 % (20/20) | 100.0 % (20/20) | 95.0 % (19/20) | 100.0 % (20/20) | 100.0 % (20/20) | 90.0 % (18/20) | 95.0 % (19/20) | 95.0 % (19/20) | 100.0 % (20/20) | 100.0 % (20/20) | 100.0 % (20/20) | 85.0 % (17/20) | 100.0 % (20/20) | 85.0 % (17/20) |
-| francais | 100.0 % (10/10) | 100.0 % (10/10) | 100.0 % (10/10) | 100.0 % (10/10) | 90.0 % (9/10) | 100.0 % (10/10) | 100.0 % (10/10) | 90.0 % (9/10) | 90.0 % (9/10) | 100.0 % (10/10) | 100.0 % (10/10) | 100.0 % (10/10) | 100.0 % (10/10) | 100.0 % (10/10) | 100.0 % (10/10) | 100.0 % (10/10) | 100.0 % (10/10) |
-| maths | 100.0 % (20/20) | 100.0 % (20/20) | 100.0 % (20/20) | 100.0 % (20/20) | 100.0 % (20/20) | 100.0 % (20/20) | 95.0 % (19/20) | 100.0 % (20/20) | 100.0 % (20/20) | 90.0 % (18/20) | 85.0 % (17/20) | 100.0 % (20/20) | 80.0 % (16/20) | 95.0 % (19/20) | 85.0 % (17/20) | 100.0 % (20/20) | 100.0 % (20/20) |
+| code | 94.7 % (18/19) | 100.0 % (19/19) | 94.7 % (18/19) | 100.0 % (19/19) | 100.0 % (19/19) | 89.5 % (17/19) | 100.0 % (19/19) | 94.7 % (18/19) | 100.0 % (19/19) | 100.0 % (19/19) | 100.0 % (19/19) | 100.0 % (19/19) | 94.7 % (18/19) | 94.7 % (18/19) | 100.0 % (19/19) | 94.7 % (18/19) | 89.5 % (17/19) |
+| consignes | 100.0 % (20/20) | 100.0 % (20/20) | 100.0 % (20/20) | 95.0 % (19/20) | 100.0 % (20/20) | 100.0 % (20/20) | 95.0 % (19/20) | 100.0 % (20/20) | 85.0 % (17/20) | 100.0 % (20/20) | 100.0 % (20/20) | 90.0 % (18/20) | 95.0 % (19/20) | 85.0 % (17/20) | 100.0 % (20/20) | 75.0 % (15/20) | 95.0 % (19/20) |
+| extraction | 100.0 % (20/20) | 95.0 % (19/20) | 100.0 % (20/20) | 95.0 % (19/20) | 100.0 % (20/20) | 100.0 % (20/20) | 100.0 % (20/20) | 100.0 % (20/20) | 95.0 % (19/20) | 100.0 % (20/20) | 100.0 % (20/20) | 100.0 % (20/20) | 100.0 % (20/20) | 100.0 % (20/20) | 100.0 % (20/20) | 100.0 % (20/20) | 85.0 % (17/20) |
+| factuel | 100.0 % (20/20) | 100.0 % (20/20) | 100.0 % (20/20) | 100.0 % (20/20) | 95.0 % (19/20) | 100.0 % (20/20) | 100.0 % (20/20) | 100.0 % (20/20) | 100.0 % (20/20) | 95.0 % (19/20) | 85.0 % (17/20) | 95.0 % (19/20) | 100.0 % (20/20) | 100.0 % (20/20) | 90.0 % (18/20) | 100.0 % (20/20) | 85.0 % (17/20) |
+| francais | 94.4 % (17/18) | 94.4 % (17/18) | 94.4 % (17/18) | 94.4 % (17/18) | 100.0 % (18/18) | 88.9 % (16/18) | 100.0 % (18/18) | 77.8 % (14/18) | 100.0 % (18/18) | 94.4 % (17/18) | 100.0 % (18/18) | 83.3 % (15/18) | 83.3 % (15/18) | 88.9 % (16/18) | 72.2 % (13/18) | 83.3 % (15/18) | 100.0 % (18/18) |
+| maths | 100.0 % (20/20) | 100.0 % (20/20) | 100.0 % (20/20) | 100.0 % (20/20) | 90.0 % (18/20) | 100.0 % (20/20) | 80.0 % (16/20) | 100.0 % (20/20) | 95.0 % (19/20) | 85.0 % (17/20) | 85.0 % (17/20) | 100.0 % (20/20) | 95.0 % (19/20) | 100.0 % (20/20) | 100.0 % (20/20) | 100.0 % (20/20) | 100.0 % (20/20) |
 
 ## Items discriminants
 
@@ -41,27 +41,24 @@ _Notation déterministe (regex, JSON, code exécuté, calcul exact). Aucun juge 
 **consignes** — consignes-03, consignes-09, consignes-13, consignes-14, consignes-18, consignes-20
 **extraction** — extraction-03, extraction-06, extraction-08, extraction-16
 **factuel** — factuel-04, factuel-08, factuel-11, factuel-17, factuel-19, factuel-20
-**francais** — francais-07, francais-16
+**francais** — francais-04, francais-07, francais-08, francais-10, francais-12, francais-15, francais-16, francais-19, francais-20
 **maths** — maths-02, maths-03, maths-04, maths-05, maths-08, maths-10, maths-11
 
 ## Échecs communs à tous les modèles (à inspecter : checker trop strict ?)
 
 
-## Échecs — gemma-4-26b-a4b (1)
+## Échecs — gemma-4-26b-a4b (2)
 
 - `code-18` — 0/1 tests — ````python
 def devise(n):
     return f"{n:,.2f}".replace(",", " ").replace(".", ",") + " €"
 ````
+- `francais-19` — juge Claude : KO — `Voici plusieurs options selon la nuance que vous souhaitez donner :
 
-## Échecs — nemotron3-nano-30b (1)
+**La plus simple et directe :**
+> « Le se`
 
-- `code-18` — 0/1 tests — ````python
-def devise(n):
-    return f"{n:n}".replace(",", " ") + " €"
-````
-
-## Échecs — Qwen3.5-397B-A17B (1)
+## Échecs — Qwen3.5-397B-A17B (2)
 
 - `extraction-03` — champs ['modele', 'site', 'prix_ht', 'garantie_mois'] — `{
   "modele": "Switch Cisco Catalyst 9300",
@@ -69,13 +66,19 @@ def devise(n):
   "prix_ht": 6480,
   "garantie_mois": 12
 }`
+- `francais-08` — juge Claude : KO — ``
 
-## Échecs — Qwen3.6-27B (1)
+## Échecs — Qwen3.6-27B (2)
 
 - `code-18` — 0/1 tests — ````python
 def devise(n):
     return f"{n:_} €"
 ````
+- `francais-19` — juge Claude : KO — `Voici une version fluide et sans répétition :
+
+**« Le serveur est lent, vieux et chauffe. »**
+
+💡 *Note de st`
 
 ## Échecs — gpt-oss-120b (3)
 
@@ -88,24 +91,17 @@ def devise(n):
 }`
 - `francais-16` — manquants: [['quoi que']] — `quoique`
 
-## Échecs — laguna-xs-2.1 (3)
+## Échecs — Qwen3.8-27B (3)
 
-- `consignes-18` — 2 mots — `Bridge rectifier`
-- `consignes-20` — lu: les temperatures classees de la plus froide a la plus chaude — `Les températures classées de la plus froide à la plus chaude sont :  
-**-3°C < 7°C < 12°C**`
-- `factuel-19` — attendu [299792, 300000], lu 300.0 — `La vitesse de la lumière dans le vide est définie exactement comme étant 299 792,458 mètres par seconde. Pour`
+- `factuel-20` — attendu [24, 28], lu 20.0 — `Le CPU AM5 grand public de la série Ryzen 7000 expose 20 lanes PCIe directement côté CPU.
 
-## Échecs — Meta-Llama-3_3-70B-Instruct (3)
+RÉPONSE: 20`
+- `maths-05` — attendu 22, lu -22.0 — `En passant du repos (16 W) à la charge (38 W), la consommation augmente de 22 W, donc l’économie est négativ`
+- `maths-10` — attendu 111, lu -111.0 — `En passant du repos à la charge, la consommation augmente de 111 W, donc l’économie est négative.
 
-- `code-18` — 0/1 tests — ````python
-def devise(n):
-    return "{:,.2f} €".format(n).replace(",", " ").replace(".", ",")
+RÉPONSE:`
 
-# Exemple d'uti`
-- `consignes-14` — lu: LE PROTOCOLE DNS SERVIRA A RESOUDRE LES  — `LE PROTOCOLE DNS SERVIRA A RESOUDRE LES NOMS DE DOMAINES EN ADRESSES IP`
-- `maths-11` — attendu 8280, lu 8279.0 — `Pour calculer le prix total après remise, nous devons d’abord calculer le prix d’un serveur après remise, puis`
-
-## Échecs — nemotron3-omni-30b (3)
+## Échecs — nemotron3-omni-30b (4)
 
 - `code-17` — 0/2 tests — ````python
 def dichotomy(l, x):
@@ -118,42 +114,7 @@ def devise(n):
     num = int(n)
     # Forma`
 - `francais-07` — lu: Il a dit, je viendrai demain — `Il a dit, je viendrai demain`
-
-## Échecs — Olala-v1.0-mini-7A1B (3)
-
-- `factuel-08` — attendu 1999, lu 2005.0 — `RÉPONSE: 2005`
-- `factuel-11` — attendu 240, lu 100.0 — `Le port USB‑C Power Delivery en mode PD 3.1 maximal délivre jusqu’à 100 watts. RÉPONSE: 100`
-- `francais-07` — lu: Il a dit que je viendrai demain. — `Il a dit que je viendrai demain.`
-
-## Échecs — Qwen3.8-27B (3)
-
-- `factuel-20` — attendu [24, 28], lu 20.0 — `Le CPU AM5 grand public de la série Ryzen 7000 expose 20 lanes PCIe directement côté CPU.
-
-RÉPONSE: 20`
-- `maths-05` — attendu 22, lu -22.0 — `En passant du repos (16 W) à la charge (38 W), la consommation augmente de 22 W, donc l’économie est négativ`
-- `maths-10` — attendu 111, lu -111.0 — `En passant du repos à la charge, la consommation augmente de 111 W, donc l’économie est négative.
-
-RÉPONSE:`
-
-## Échecs — qwen3.6-35b-a3b (4)
-
-- `factuel-19` — attendu [299792, 300000], lu None — ``
-- `maths-02` — attendu 86, lu None — ``
-- `maths-08` — attendu 57, lu -57.0 — `Pour déterminer la quantité de watts économisés, il faut calculer la différence entre la consommation initia`
-- `maths-10` — attendu 111, lu None — ``
-
-## Échecs — qwen3-vl-30b-a3b (4)
-
-- `code-17` — 0/2 tests — ````python
-def dichotomie(l, x):
-    gauche, droit = 0, len(l) - 1
-    while gauche <= droit:
-        milieu =`
-- `consignes-03` — 22 mots — `Carte mère connecte composants gère flux données supporte processeur mémoire ports buses électronique intégrée`
-- `consignes-13` — 7 mots — `Aujourd'hui, le soleil brille dans le ciel.`
-- `consignes-20` — lu: pour classer les temperatures de la plus froide a la plus ch — `Pour classer les températures de la plus froide à la plus chaude, on compare les valeurs numériques :
-
--3°C es`
+- `francais-12` — juge Claude : KO — `Avec « avoir », le participe passé s’accorde uniquement avec le COD placé avant le verbe ; s’il n’y a pas de`
 
 ## Échecs — DeepSeek-V4.1-Flash-1017 (5)
 
@@ -166,6 +127,21 @@ RÉPONSE: 0`
 
 RÉ`
 - `maths-10` — attendu 111, lu -111.0 — `En passant du repos (14 W) à la charge (125 W), la consommation augmente de 111 W. On n’économise donc rien :`
+
+## Échecs — nemotron3-nano-30b (5)
+
+- `code-18` — 0/1 tests — ````python
+def devise(n):
+    return f"{n:n}".replace(",", " ") + " €"
+````
+- `francais-04` — juge Claude : KO — `« Malheureusement, il est cher, mais nous allons le prendre. »  
+
+ou, plus simplement :  
+
+« Malgré qu’il soi`
+- `francais-10` — juge Claude : KO — `Viendras-tu ?`
+- `francais-12` — juge Claude : KO — `Avec l’auxiliaire **avoir**, le participe passé ne s’accorde jamais avec le sujet ; il ne s’accorde que s’il`
+- `francais-15` — juge Claude : KO — `Il a envoyé la lettre à _[à Pierre]_.`
 
 ## Échecs — Qwen2.5-VL-72B-Instruct (5)
 
@@ -182,6 +158,14 @@ RÉ`
 
 1. Calcule`
 
+## Échecs — qwen3.6-35b-a3b (5)
+
+- `factuel-19` — attendu [299792, 300000], lu None — ``
+- `francais-19` — juge Claude : KO — `« Le serveur est lent, ancien et surchauffe. »`
+- `maths-02` — attendu 86, lu None — ``
+- `maths-08` — attendu 57, lu -57.0 — `Pour déterminer la quantité de watts économisés, il faut calculer la différence entre la consommation initia`
+- `maths-10` — attendu 111, lu None — ``
+
 ## Échecs — gpt-oss-20b (6)
 
 - `factuel-04` — attendu [735, 736], lu 75000.0 — `RÉPONSE: 75000`
@@ -191,7 +175,64 @@ RÉ`
 - `maths-05` — attendu 22, lu -22.0 — `RÉPONSE: -22.`
 - `maths-10` — attendu 111, lu 0.0 — `RÉPONSE: 0`
 
-## Échecs — Mistral-Small-3.2-24B-Instruct-2506 (6)
+## Échecs — laguna-xs-2.1 (6)
+
+- `consignes-18` — 2 mots — `Bridge rectifier`
+- `consignes-20` — lu: les temperatures classees de la plus froide a la plus chaude — `Les températures classées de la plus froide à la plus chaude sont :  
+**-3°C < 7°C < 12°C**`
+- `factuel-19` — attendu [299792, 300000], lu 300.0 — `La vitesse de la lumière dans le vide est définie exactement comme étant 299 792,458 mètres par seconde. Pour`
+- `francais-08` — juge Claude : KO — `**Réponse :**  
+« Il **commet** une erreur. »  
+
+Le verbe **commettre** (ou **cometer**) est plus précis et id`
+- `francais-10` — juge Claude : KO — `**Phrase réécrite au style direct :**  
+« Il m'a demandé si je viens. »  
+
+**Explication :**  
+Le style direct`
+- `francais-12` — juge Claude : KO — `Le participe passé s'accorde en genre et en nombre avec le sujet lorsqu'il est précédé de "avoir". Il s'accord`
+
+## Échecs — Meta-Llama-3_3-70B-Instruct (6)
+
+- `code-18` — 0/1 tests — ````python
+def devise(n):
+    return "{:,.2f} €".format(n).replace(",", " ").replace(".", ",")
+
+# Exemple d'uti`
+- `consignes-14` — lu: LE PROTOCOLE DNS SERVIRA A RESOUDRE LES  — `LE PROTOCOLE DNS SERVIRA A RESOUDRE LES NOMS DE DOMAINES EN ADRESSES IP`
+- `francais-08` — juge Claude : KO — `Commets`
+- `francais-12` — juge Claude : KO — `Lorsqu'un verbe est conjugué avec "avoir", le participe passé s'accorde en genre et en nombre avec l'objet dir`
+- `francais-19` — juge Claude : KO — `Voici une version sans répétition : « Le serveur est lent, vieux et chauffe. »`
+- `maths-11` — attendu 8280, lu 8279.0 — `Pour calculer le prix total après remise, nous devons d’abord calculer le prix d’un serveur après remise, puis`
+
+## Échecs — qwen3-vl-30b-a3b (6)
+
+- `code-17` — 0/2 tests — ````python
+def dichotomie(l, x):
+    gauche, droit = 0, len(l) - 1
+    while gauche <= droit:
+        milieu =`
+- `consignes-03` — 22 mots — `Carte mère connecte composants gère flux données supporte processeur mémoire ports buses électronique intégrée`
+- `consignes-13` — 7 mots — `Aujourd'hui, le soleil brille dans le ciel.`
+- `consignes-20` — lu: pour classer les temperatures de la plus froide a la plus ch — `Pour classer les températures de la plus froide à la plus chaude, on compare les valeurs numériques :
+
+-3°C es`
+- `francais-15` — juge Claude : KO — `J’**envoie** [une lettre à mon ami] tous les jours.  
+
+Le complément d'objet indirect est **[une lettre à mon`
+- `francais-19` — juge Claude : KO — `Le serveur est lent, vieux et surchauffe.`
+
+## Échecs — Olala-v1.0-mini-7A1B (7)
+
+- `factuel-08` — attendu 1999, lu 2005.0 — `RÉPONSE: 2005`
+- `factuel-11` — attendu 240, lu 100.0 — `Le port USB‑C Power Delivery en mode PD 3.1 maximal délivre jusqu’à 100 watts. RÉPONSE: 100`
+- `francais-07` — lu: Il a dit que je viendrai demain. — `Il a dit que je viendrai demain.`
+- `francais-10` — juge Claude : KO — `La phrase « Il m'a demandé si je viendrais » est déjà exprimée de manière directe en français. Cependant, si l`
+- `francais-12` — juge Claude : KO — `Le participe passé s’accorde en genre et en nombre avec le complément d’objet direct lorsqu’on l’utilise avec`
+- `francais-19` — juge Claude : KO — `Le serveur devient lent, vieilli et chaud.`
+- `francais-20` — juge Claude : KO — `digitale, informatique, électronique`
+
+## Échecs — Mistral-Small-3.2-24B-Instruct-2506 (9)
 
 - `code-18` — 0/1 tests — ````python
 def devise(n):
@@ -206,6 +247,15 @@ Balzac, Hugo, Zola`
 - `consignes-20` — lu: pour classer les temperatures de la plus froide a la plus ch — `Pour classer les températures de la plus froide à la plus chaude, nous comparons les valeurs numériques :
 
 - *`
+- `francais-15` — juge Claude : KO — `Voici un exemple de phrase contenant un complément d'objet indirect (souligné entre croches) :
+
+*Je parle [à m`
+- `francais-19` — juge Claude : KO — `Voici quelques reformulations sans répétition :
+
+1. « Le serveur est lent, il est aussi ancien et surchauffe.`
+- `francais-20` — juge Claude : KO — `Voici trois mots de la même famille que « numérique » :
+
+**numérisation, numériser, digital**`
 
 ## Échecs — Qwen3.5-9B (9)
 

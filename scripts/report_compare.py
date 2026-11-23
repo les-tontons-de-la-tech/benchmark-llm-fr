@@ -12,13 +12,27 @@ sys.path.insert(0, str(HERE / "scripts"))
 from check import check  # notation déterministe partagée
 RUNS = HERE / "runs"
 
-# tarifs USD / token (catalogue OVH au 23/11/2026)
+# Tarifs USD / token, relevés sur https://catalog.endpoints.ai.ovh.net/rest/v1/models_v2
+# le 23/11/2026 (champs price_usd + price_unit). NE JAMAIS déduire un prix de /v1/models :
+# cet endpoint renvoie 0 pour 11 modèles payants. Source : prices_catalog.json.
 PRICING = {
     "Olala-v1.0-mini-7A1B": (0.0, 0.0),
     "Mistral-Small-3.2-24B-Instruct-2506": (0.0000001, 0.00000031),
     "Qwen3.5-9B": (0.00000012, 0.00000018),
+    "Qwen3.6-27B": (0.00000047, 0.00000319),
     "Qwen3.8-27B": (0.00000047, 0.00000319),
     "gpt-oss-20b": (0.00000005, 0.00000018),
+    "gpt-oss-120b": (0.00000009, 0.00000047),
+    "DeepSeek-V4.1-Flash-1017": (0.00000031, 0.00000125),
+    "gemma-4-26b-a4b": (0.0000001, 0.00000041),
+    "laguna-xs-2.1": (0.00000006, 0.00000012),
+    "Meta-Llama-3_3-70B-Instruct": (0.00000074, 0.00000074),
+    "nemotron3-nano-30b": (0.00000006, 0.00000023),
+    "nemotron3-omni-30b": (0.00000019, 0.00000057),
+    "Qwen2.5-VL-72B-Instruct": (0.00000101, 0.00000101),
+    "Qwen3.5-397B-A17B": (0.00000071, 0.00000425),
+    "qwen3-vl-30b-a3b": (0.00000015, 0.00000058),
+    "qwen3.6-35b-a3b": (0.0000002, 0.00000133),
 }
 
 prompts = {}
@@ -76,8 +90,12 @@ for f in sorted(RUNS.glob("*.jsonl")):
     trunc = sum(1 for r in recs if r.get("finish") == "length")
     errs = sum(1 for r in recs if r.get("error"))
     s = score(recs)
-    pin, pout = PRICING.get(m, (0, 0))
-    cost = sum(tok_in) * pin + sum(toks) * pout
+    pr = PRICING.get(m)
+    if pr is None:
+        cost = None          # tarif inconnu : on affichera "n.d.", jamais "gratuit"
+    else:
+        pin, pout = pr
+        cost = sum(tok_in) * pin + sum(toks) * pout
     models[m] = {"recs": recs, "score": s, "lat": lat, "toks": toks,
                  "trunc": trunc, "errs": errs, "cost": cost, "n": len(recs)}
 
@@ -92,7 +110,12 @@ out = ["# Comparatif modèles — 120 tâches françaises (OVHcloud AI Endpoints
 for m in order:
     d = models[m]
     sc = d["score"]
-    cost = "gratuit" if d["cost"] == 0 else f"{d['cost']*100:.2f} c$"
+    if d["cost"] is None:
+        cost = "n.d."          # tarif absent du catalogue : ne jamais écrire « gratuit »
+    elif d["cost"] == 0:
+        cost = "gratuit"
+    else:
+        cost = f"{d['cost']*100:.2f} c$"
     out.append(f"| {m} | **{sc['global']} %** | {sc['passed']}/{sc['n']} | "
                f"{statistics.mean(d['lat']):.1f} s | {statistics.mean(d['toks']):.0f} | "
                f"{d['trunc']} | {d['errs']} | {cost} |")

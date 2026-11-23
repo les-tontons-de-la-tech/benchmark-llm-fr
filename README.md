@@ -4,14 +4,34 @@ Banc d'évaluation en français pour modèles servis par API, avec **notation d�
 aucun juge LLM. 120 tâches réparties en 6 familles, notées mécaniquement (regex, JSON parsé,
 calcul exact, code réellement exécuté en sandbox).
 
-Premier run publié : comparatif **Olala mini 7A1B / Mistral-Small 3.2 24B / Qwen3.5-9B**
-via OVHcloud AI Endpoints, le 23 novembre 2026.
+Run publié : **17 modèles** servis par OVHcloud AI Endpoints, 23 novembre 2026.
+Coût calculé sur les tokens réellement consommés, tarifs du **catalogue OVHcloud** (jamais ceux de
+`/v1/models`, qui renvoie 0 pour onze modèles payants).
 
 | Modèle | Note | Latence moy. | Tokens sortie | Coût / 120 tâches |
 |---|---|---|---|---|
-| Olala-v1.0-mini-7A1B | **97,2 %** (106/109) | 4,9 s | 1 458 | gratuit au catalogue |
-| Mistral-Small-3.2-24B-Instruct-2506 | **94,5 %** (103/109) | 4,4 s | 60 | 0,28 c$ |
-| Qwen3.5-9B | **90,8 %** (99/109) | 26,7 s | 2 886 | 6,31 c$ |
+| gemma-4-26b-a4b | **99,1 %** (108/109) | 8,3 s | 1 127 | 5,61 c$ |
+| nemotron3-nano-30b | **99,1 %** (108/109) | **1,8 s** | 329 | **0,95 c$** |
+| Qwen3.5-397B-A17B | **99,1 %** (108/109) | 14,4 s | 2 313 | 118,38 c$ |
+| Qwen3.6-27B | **99,1 %** (108/109) | 7,8 s | 1 108 | 42,72 c$ |
+| gpt-oss-120b | 97,2 % (106/109) | 2,9 s | 212 | 1,31 c$ |
+| laguna-xs-2.1 | 97,2 % (106/109) | 5,4 s | 729 | 1,11 c$ |
+| Meta-Llama-3_3-70B-Instruct | 97,2 % (106/109) | 2,8 s | 79 | 1,40 c$ |
+| nemotron3-omni-30b | 97,2 % (106/109) | 2,5 s | 383 | 2,76 c$ |
+| Olala-v1.0-mini-7A1B | 97,2 % (106/109) | 4,9 s | 1 458 | gratuit au catalogue |
+| Qwen3.8-27B | 97,2 % (106/109) | 6,0 s | 621 | 24,29 c$ |
+| qwen3.6-35b-a3b | 96,3 % (105/109) | 14,0 s | 2 035 | 32,60 c$ |
+| qwen3-vl-30b-a3b | 96,3 % (105/109) | 1,3 s | 157 | 1,19 c$ |
+| DeepSeek-V4.1-Flash-1017 | 95,4 % (104/109) | 1,6 s | 302 | 4,80 c$ |
+| Qwen2.5-VL-72B-Instruct | 95,4 % (104/109) | 2,0 s | 66 | 1,58 c$ |
+| gpt-oss-20b | 94,5 % (103/109) | 2,3 s | 270 | 0,65 c$ |
+| Mistral-Small-3.2-24B-Instruct-2506 | 94,5 % (103/109) | 4,4 s | 60 | 0,28 c$ |
+| Qwen3.5-9B | 91,7 % (100/109) | 26,7 s | 2 886 | 6,31 c$ |
+
+**Lecture honnête** : quatre modèles à 99,1 % ne sont pas départageables — un échec d'écart sur
+109 items. L'écart avec le 5e (97,2 %) vaut deux items. Ce qui tranche réellement, c'est le couple
+latence/coût : **nemotron3-nano-30b** atteint le meilleur score pour **125 fois moins cher** et
+**8 fois plus vite** que Qwen3.5-397B-A17B. Et **Qwen3.5-9B** décroche seul, à 91,7 %.
 
 Détail, échecs item par item et analyse : [RESULTATS.md](RESULTATS.md).
 
@@ -88,6 +108,9 @@ la main — et corrigés avant de publier le moindre chiffre :
 - `code-16` écarté : le test passait un `\n` littéral (item insoluble), puis l'énoncé lui-même
   s'est révélé ambigu (CSV 2×2) ;
 - `code-14` : normalisation numérique (`2.00 Ko` = `2.0 Ko` = `2 Ko`), le format n'étant pas imposé ;
+- `code-06` (FizzBuzz) : l'énoncé ne fixe pas le type des éléments ; un modèle qui renvoie `[1, 2,
+  "Fizz"]` au lieu de `["1", "2", "Fizz"]` répond juste. Comparaison en texte quand l'attendu est
+  une chaîne — trois modèles étaient pénalisés sur ce détail, ils remontent à 99,1 % ;
 - `consignes-17` : guillemets ouvrants ignorés, ce n'est pas une violation de consigne ;
 - `factuel-04` : 735 et 736 acceptés (1 ch métrique = 735,49875 W, troncature ou arrondi de 735,5) ;
 - `francais-13` écarté : deux trous dans la phrase pour une réponse d'un seul mot ;
@@ -115,7 +138,12 @@ de **rejouer la notation sans rappeler l'API**, et de vérifier chaque score.
 - Jeu orienté tâches courtes et vérifiables ; rien ici ne mesure le contexte long, le RAG, la
   rédaction longue, ni le coût d'un usage réel en production.
 - 8 items de français restent à juger et 2 ont été écartés : le score « français » ne porte que sur 10.
-- Échantillon de 109 items notés : un écart de 2 à 3 points n'est pas significatif.
+- Échantillon de 109 items notés : un écart de 2 à 3 points n'est pas significatif (intervalle de
+  confiance à 95 % d'environ ± 2,5 points autour de 98 %, ± 4 à 5 points autour de 90 %). Les quatre
+  premiers du classement ont le même score à un item près : **ne pas y lire une hiérarchie**.
+- Trois modèles raisonneurs ont des items restés tronqués après relance au budget maximal de
+  16 000 tokens (`qwen3.6-35b-a3b` 3, `Qwen3.5-397B-A17B` 1, `Qwen3.5-9B` 1) : c'est un
+  comportement réel du modèle sur ces items, pas un défaut de mesure, mais cela compte en échec.
 - La latence mesurée est le temps total de l'appel HTTP, raisonnement inclus, pas le temps avant
   premier token.
 - Le jeu est calibré sur un domaine (hardware, cloud, français technique) et n'a pas été validé

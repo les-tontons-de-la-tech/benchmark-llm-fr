@@ -54,12 +54,27 @@ def _norm(v):
 """
     harness.append(_NORM)
     harness.append(f"""
+def _eq(a, b):
+    a, b = _norm(a), _norm(b)
+    if isinstance(a, list) and isinstance(b, list):
+        if len(a) != len(b):
+            return False
+        for x, y in zip(a, b):
+            # l'énoncé ne fixe pas le type des éléments (FizzBuzz : 1 ou \"1\") :
+            # on compare en texte quand l'attendu est une chaîne
+            if isinstance(y, str) and not isinstance(x, str):
+                x = str(x)
+            if _norm(x) != _norm(y):
+                return False
+        return True
+    return a == b
+
 out=[]
 for args,expected in TESTS:
     try:
         got=globals()[{spec['fn']!r}](*args)
         if isinstance(got,set): got=sorted(got)
-        out.append(_norm(got)==_norm(expected))
+        out.append(_eq(got, expected))
     except Exception as e:
         out.append(False)
 print(json.dumps(out))
